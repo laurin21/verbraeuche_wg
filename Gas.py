@@ -29,6 +29,8 @@ gas["Average"] = avg_gas
 gas["Datum"] = pd.to_datetime(gas["Datum"], format = "%d.%m.%Y", errors = "coerce")
 gas_months = gas.groupby(gas.Datum.dt.month)["Gas"].sum()
 
+st.write(gas_months)
+
 
 st.title("Gasverbrauch")
 fig, ax = plt.subplots()
