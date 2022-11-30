@@ -26,6 +26,9 @@ for i in range(len(gas["Gas"])):
 
 gas["Average"] = avg_gas
 
+gas["Datum"] = pd.to_datetime(gas["Datum"], format = "%d.%m.%Y", errors = "coerce")
+gas_months = gas.groupby(gas.Datum.dt.month)["Betrag"].sum()
+gas_cat = gas.groupby("Kategorie")["Betrag"].sum()
 
 
 
