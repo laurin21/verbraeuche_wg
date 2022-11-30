@@ -31,6 +31,7 @@ gas_months = gas.groupby(gas.Datum.dt.month)["Gas"].sum()
 
 st.write(gas_months)
 
+start_date = datetime.datetime.now() - datetime.timedelta(30)
 
 st.title("Gasverbrauch")
 fig, ax = plt.subplots()
