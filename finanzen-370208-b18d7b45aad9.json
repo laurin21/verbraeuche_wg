@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "finanzen-370208",
+  "private_key_id": "b18d7b45aad91a143f5209a4fad1ac1878992bd1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCh1W6t0KgBK+2N\n4TizSxGSvaGgbDOv0pDzkvemMaz29VxQlGsHZJOTgEhS+A7Nc7jeVdRsRArrdPu3\nz5owY/rZzTLdtSGEViVUcC6DLt2sBrAc+a8JFqxldB01CWF4o54zepAVIhrAqt01\n/WbtHF7MnOGzHoMyjQGYb1Nk8ym2jjxrry0b/GY7ms7UsSR5WafDZTJNxNBWbpEU\nsw5pNHdT+Gz5uQC8q1o88RPu1pPllj5AIbRFVkANQtuki+jPrqNB07D6HgH++3Oq\npJeynviglpSLSxKTwOQyJoSFcf1t6JcEgM0cOKM4kmxOLfBya6+ep21RQdeVtmls\nlg+8dS3lAgMBAAECggEAIsMjbp+y7ul+MitOUCkQYcptFPYZFivvafrISoFCK5wh\n08dFxEVE8/qqznOtTlGMxOl/4y+sfs5WobGs57caM73BruERDYmppB0iyJgBEsou\n+1Jg2F1v860A9xsIPm869MjfeUKlp3wsX0QK32ToMiCC1MR5nxqt3I4RRk57R9Sn\nPlqUdieNAzoukCOpfT9yJMtF1chchfEEbIALU7KOsdVNI7UD0FeRvYZ9t9uqX2Z3\nO3VDZM5QMDmqpeyQ8GGr0Ejoz7bnwnQ+OJRYjdDERwSu89rUakAC7D7w5LdmYwcN\nfcEdrIKsbgLyqAobLJS0Ajk6+EdOFNEWC59dMFdwkQKBgQDUEq5cbk+wJLK1AC34\nwkaQpGmcg9E93PffcdZbRDOHVH1yIjq4V/91yCZxje348LkjfIDjKVj8Q4j934jf\nf61NwpXwYtJrhkyDSiIJufBraJfvMgAwMpaSBFtPcrO6qYuSlVsHXaDCGh7WE/JB\nOCsCZv6oC8l2jzKk5IOtDgwB6QKBgQDDWseJHbG+2YBU7PntBhlPw1mN0qPs2UCt\newdBhR0d/8DUQMEvaNssCjkTpZh8pA1iKPk54+vKAIUtax6I31sefPIjGzJR8+Vm\nZrNlrfQikT0RDI46SzClcYtuCPah8Jcp5hy3tA7NM/UiUPNZfaFmuXNgMt77SXgR\ncP8j2SSynQKBgDsqaxLGg9z0oBb3UdwQ93brJ7vO2tWTjGP+cntL78RVwhnRiuhb\nRJ4rlO4hVr8ZCc3oslyt8HGQtet+LcWM7WDAZOyH5YSyFy6ZxB1KjtSofZryLDNG\nKdPa+06TBamSG6ptmNPZPzxn5Sp8rh2b+gPVkD556170XIC8cDAbtyXhAoGAA/0E\ned4rVNQn9JPp/lbTiXdZirW0Nw+wbFpIqaPIFma0TyELUKZ5YwrKY4ZL+K94vnpL\nrEzk8XjVPzoio3S77YFriB/0BQxPsKmEHB1TEKmab5CsDrCeS6Jn0FVKg7/ftjFG\ngNGiQ7o91PeGIFuaQfijTGF9f+/eDa0a6GZ0g1kCgYEAugxfYo5GDE5bYEEkvKmJ\nB4bx2+idMzWHfEudtwpF2+YhaV+xpkZs9M9UEGn3O/4bvnbNR+uWxVHVBRXEf5MT\nM7SS1tlUpuee90FQCQ5TUvzzoafK2hVnBvOuN2zcfPMQ7M8YWx8PJITGIS6ygNqi\nrltUiU5AWigNEJAYsjl+u4c=\n-----END PRIVATE KEY-----\n",
+  "client_email": "laurin@finanzen-370208.iam.gserviceaccount.com",
+  "client_id": "108340039917437513994",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/laurin%40finanzen-370208.iam.gserviceaccount.com"
+}
