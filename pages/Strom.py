@@ -8,13 +8,17 @@ import matplotlib.pyplot as plt
 
 sa = gspread.service_account("service_account.json")
 sh = sa.open("verbraeuche_wg")
-
 strom = sh.worksheet("Strom")
 strom = pd.DataFrame(strom.get_all_records())
 
-st.title("Stromverbrauch")
+st.set_page_config(
+    page_title="Strom",
+    page_icon="",
+    menu_items={}
+)
 
-## Strom
+
+
 avg_strom = []
 
 for i in range(len(strom["Strom"])):
@@ -23,7 +27,10 @@ for i in range(len(strom["Strom"])):
 
 strom["Average"] = avg_strom
 
-st.subheader("Strom")
+
+
+st.title("Stromverbrauch")
+
 fig, ax = plt.subplots()
 ax.plot(strom["Datum"], strom["Strom"])
 ax.plot(strom["Datum"], strom["Average"], c = "r")
