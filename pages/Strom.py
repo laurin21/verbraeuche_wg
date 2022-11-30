@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 import numpy as np
 import time
 import gspread
@@ -18,6 +18,7 @@ st.set_page_config(
 )
 
 
+strom["Strom"] = strom["Strom"].div(100)
 
 avg_strom = []
 
@@ -27,9 +28,32 @@ for i in range(len(strom["Strom"])):
 
 strom["Average"] = avg_strom
 
+strom["Datum"] = pd.to_datetime(strom["Datum"], format = "%d.%m.%Y", errors = "coerce")
+strom_months = strom.groupby(strom.Datum.dt.month)["Strom"].sum()
 
+jetzt = strom["Datum"][len(strom["Datum"])-1]
+one_month_ago = jetzt - timedelta(days = 30)
+
+strom_last_month = strom[strom["Datum"] > one_month_ago]
+
+index_list = strom_last_month.index
+
+verbrauch_last_month = strom["Strom"][index_list[-1]] - strom["Strom"][index_list[0]]
+
+
+costs_last_month =  round(((8.85 + verbrauch_last_month *39.85) / 100),2)
+
+costs_last_month_pp = round(costs_last_month / 3,2)
+
+###
 
 st.title("Stromverbrauch")
+
+st.subheader(f"In den letzten 30 Tagen haben wir für {costs_last_month}€ Strom verbraucht.")
+st.write(f"Das sind {costs_last_month_pp} pro Person.")
+st.write("")
+st.write("Zählerstände der letzten 30 Tage:")
+st.write(strom_last_month[["Datum", "Strom"]])
 
 fig, ax = plt.subplots()
 ax.plot(strom["Datum"], strom["Strom"])
@@ -39,4 +63,9 @@ ax.spines["top"].set_visible(False)
 ax.tick_params(right = False ,
                 labelbottom = False, bottom = False)
 st.pyplot(fig)
+st.write("")
+st.markdown("---")
+st.write("")
+st.write("Stromverbräuche pro Monat:")
 
+st.bar_chart(strom_months)
