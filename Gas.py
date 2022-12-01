@@ -48,7 +48,7 @@ costs_last_month_pp = round(costs_last_month / 3,2)
 st.title("Gasverbrauch")
 
 st.subheader(f"In den letzten 30 Tagen haben wir für {costs_last_month}€ Gas verbraucht.")
-st.write(f"Das sind {costs_last_month_pp} pro Person.")
+st.write(f"Das sind {costs_last_month_pp}€ pro Person.")
 st.write("")
 st.write("Zählerstände der letzten 30 Tage:")
 st.write(gas_last_month[["Datum", "Gas"]])
