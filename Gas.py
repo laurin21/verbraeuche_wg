@@ -60,8 +60,6 @@ ax.spines["right"].set_visible(False)
 ax.spines["top"].set_visible(False)
 ax.tick_params(right = False ,
                 labelbottom = False, bottom = False)
-fig.patch.set_facecolor((15,17,22))
-ax.set_facecolor((15,17,22))
 st.pyplot(fig)
 
 st.write("")
