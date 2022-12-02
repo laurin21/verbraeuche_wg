@@ -72,7 +72,7 @@ ax.spines["top"].set_visible(False)
 ax.spines['bottom'].set_color('white')
 ax.spines['left'].set_color('white')
 ax.tick_params(axis = "both", colors = "white")
-ax.set_xticklabels(labels = gas_months["Month"], rotation=90)
+ax.set_xticklabels(labels = strom_months["Month"], rotation=90)
 fig.patch.set_facecolor(rgb_background)
 ax.set_facecolor(rgb_background)
 
