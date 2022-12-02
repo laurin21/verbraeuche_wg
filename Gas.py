@@ -59,8 +59,6 @@ st.title("Gasverbrauch")
 st.subheader(f"In den letzten 30 Tagen haben wir für {costs_last_month}€ Gas verbraucht.")
 st.write(f"Das sind {costs_last_month_pp}€ pro Person.")
 st.write("")
-st.write("Zählerstände der letzten 30 Tage:")
-st.write(gas_last_month[["Datum", "Gas"]])
 
 fig, ax = plt.subplots()
 ax.plot(gas["Datum"], gas["Gas"])
@@ -84,5 +82,9 @@ st.write("")
 st.write("Gasverbräuche pro Monat:")
 
 st.bar_chart(gas_months["Gas"])
+
+
+st.write("Zählerstände der letzten 30 Tage:")
+st.write(gas_last_month[["Datum", "Gas"]])
 
 st.write("Hallo Tim :D")
