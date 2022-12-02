@@ -17,6 +17,8 @@ st.set_page_config(
     menu_items={}
 )
 
+rgb_background = "#0f1116"
+
 
 avg_gas = []
 
@@ -28,6 +30,8 @@ gas["Average"] = avg_gas
 
 gas["Datum"] = pd.to_datetime(gas["Datum"], format = "%d.%m.%Y", errors = "coerce")
 gas_months = gas.groupby(gas.Datum.dt.month)["Gas"].sum()
+gas_months = pd.DataFrame(gas_months)
+
 
 jetzt = gas["Datum"][len(gas["Datum"])-1]
 one_month_ago = jetzt - timedelta(days = 30)
@@ -42,6 +46,13 @@ costs_last_month =  round(((20.16333333 + verbrauch_last_month *0.1596 * 10) / 1
 
 costs_last_month_pp = round(costs_last_month / 3,2)
 
+month_lst= pd.date_range('2022-04-01', periods = len(gas_months) , freq='1M')-pd.offsets.MonthBegin(1)
+
+month_lst = [date_obj.strftime('%m.%y') for date_obj in month_lst]
+
+gas_months["Month"] = month_lst
+
+st.write(gas_months)
 
 ###
 
@@ -56,10 +67,17 @@ st.write(gas_last_month[["Datum", "Gas"]])
 fig, ax = plt.subplots()
 ax.plot(gas["Datum"], gas["Gas"])
 ax.plot(gas["Datum"], gas["Average"], c = "r")
+
+
 ax.spines["right"].set_visible(False)
 ax.spines["top"].set_visible(False)
-ax.tick_params(right = False ,
-                labelbottom = False, bottom = False)
+ax.spines['bottom'].set_color('white')
+ax.spines['left'].set_color('white')
+ax.tick_params(axis = "both", colors = "white")
+ax.set_xticklabels(labels = gas_months["Month"], rotation=90)
+fig.patch.set_facecolor(rgb_background)
+ax.set_facecolor(rgb_background)
+
 st.pyplot(fig)
 
 st.write("")
@@ -67,6 +85,6 @@ st.markdown("---")
 st.write("")
 st.write("Gasverbräuche pro Monat:")
 
-st.bar_chart(gas_months)
+st.bar_chart(gas_months["Gas"])
 
 st.write("Hallo Tim :D")
