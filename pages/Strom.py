@@ -82,7 +82,7 @@ st.markdown("---")
 st.write("")
 st.write("Stromverbräuche pro Monat:")
 
+st.bar_chart(strom_months["Strom"])
+
 st.write("Zählerstände der letzten 30 Tage:")
 st.write(strom_last_month[["Datum", "Strom"]])
-
-st.bar_chart(strom_months["Strom"])
