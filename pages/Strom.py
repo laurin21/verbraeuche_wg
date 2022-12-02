@@ -42,7 +42,7 @@ index_list = strom_last_month.index
 
 verbrauch_last_month = strom["Strom"][index_list[-1]] - strom["Strom"][index_list[0]]
 
-costs_last_month =  round(((8.85 + verbrauch_last_month *39.85) / 100),2)
+costs_last_month =  round(((8.85 + verbrauch_last_month *39.85) / 10000),2)
 
 costs_last_month_pp = round(costs_last_month / 3,2)
 
