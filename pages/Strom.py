@@ -58,10 +58,13 @@ st.write(strom_last_month[["Datum", "Strom"]])
 fig, ax = plt.subplots()
 ax.plot(strom["Datum"], strom["Strom"])
 ax.plot(strom["Datum"], strom["Average"], c = "r")
+
 ax.spines["right"].set_visible(False)
 ax.spines["top"].set_visible(False)
-ax.tick_params(right = False ,
-                labelbottom = False, bottom = False)
+ax.spines['bottom'].set_color('white')
+ax.spines['left'].set_color('white')
+ax.tick_params(axis = "both", colors = "white")
+ax.set_xticklabels(labels = gas_months["Month"], rotation=90)
 fig.patch.set_facecolor(rgb_background)
 ax.set_facecolor(rgb_background)
 
