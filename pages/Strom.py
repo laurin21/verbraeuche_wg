@@ -59,7 +59,7 @@ st.title("Stromverbrauch")
 st.subheader(f"In den letzten 30 Tagen haben wir für {costs_last_month}€ Strom verbraucht.")
 st.write(f"Das sind {costs_last_month_pp}€ pro Person.")
 st.write("")
-st.write("Zählerstände der letzten 30 Tage:")
+
 fig, ax = plt.subplots()
 
 ax.plot(strom["Datum"], strom["Strom"])
@@ -82,6 +82,7 @@ st.markdown("---")
 st.write("")
 st.write("Stromverbräuche pro Monat:")
 
+st.write("Zählerstände der letzten 30 Tage:")
 st.write(strom_last_month[["Datum", "Strom"]])
 
 st.bar_chart(strom_months["Strom"])
