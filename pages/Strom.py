@@ -60,8 +60,8 @@ st.subheader(f"In den letzten 30 Tagen haben wir für {costs_last_month}€ Stro
 st.write(f"Das sind {costs_last_month_pp}€ pro Person.")
 st.write("")
 st.write("Zählerstände der letzten 30 Tage:")
-
 fig, ax = plt.subplots()
+
 ax.plot(strom["Datum"], strom["Strom"])
 ax.plot(strom["Datum"], strom["Average"], c = "r")
 
