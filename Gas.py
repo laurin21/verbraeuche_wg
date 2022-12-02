@@ -52,8 +52,6 @@ month_lst = [date_obj.strftime('%m.%y') for date_obj in month_lst]
 
 gas_months["Month"] = month_lst
 
-st.write(gas_months)
-
 ###
 
 st.title("Gasverbrauch")
