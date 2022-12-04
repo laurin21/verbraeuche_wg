@@ -311,3 +311,14 @@ with see_data:
 		st.markdown("##### Strom")
 		st.dataframe(data=strom[["Datum", "Strom"]].reset_index(drop=True))
 
+##########################
+###### EXPERIMENTAL ######
+##########################
+
+st.write("")
+st.markdown("---")
+st.write("")
+
+see_camera = st.expander('Cheese! 📸')
+with see_camera:
+	img_file_buffer = st.camera_input(label = "")
