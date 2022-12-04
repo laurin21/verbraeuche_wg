@@ -10,9 +10,8 @@ import matplotlib.pyplot as plt
 ###### CONFIGS ######
 #####################
 
-
 st.set_page_config(
-    page_title="Engerverbauch",
+    page_title="Engerieverbauch",
     page_icon="",
     menu_items={}
 )
@@ -24,14 +23,8 @@ rgb_background = "#0f1116"
 ###### TITEL ######
 ###################
 
-st.title(f"Energieverbrauch")
+st.title(f"Energieverbräuche")
 
-
-###################################
-###### AUSWAHL ENERGEITRÄGER ######
-###################################
-
-energy_str = "Gas"
 
 ##########################
 ###### IMPORT DATEN ######
@@ -204,10 +197,10 @@ s_average_per_month = round(s_average_total / s_duration_total_m, 2)
 
 st.write(f"Durchschnitssverbauch Gas: {g_average_per_month}€ pro Monat")
 st.write(f"Durchschnittlicher Preis pro Einheit Gas: {round(g_average_price,4)}€")
-st.write(f"Gesamtkosten seit Einzug: {g_average_total}€")
-st.write(f"Durchschnitssverbauch Gas: {s_average_per_month}€ pro Monat")
-st.write(f"Durchschnittlicher Preis pro Einheit Gas: {round(s_average_price,4)}€")
-st.write(f"Gesamtkosten seit Einzug: {s_average_total}€")
+st.write(f"Gesamtkosten Gas seit Einzug: {g_average_total}€")
+st.write(f"Durchschnitssverbauch Strom: {s_average_per_month}€ pro Monat")
+st.write(f"Durchschnittlicher Preis pro Einheit Strom: {round(s_average_price,4)}€")
+st.write(f"Gesamtkosten Strom seit Einzug: {s_average_total}€")
 
 st.write("")
 st.markdown("---")
@@ -262,7 +255,7 @@ st.write("")
 
 
 ##############################
-###### GANZER DATENSATZ ######
+###### ALLGEMEINE STATS ######
 ##############################
 
 st.subheader("Allgemeine Stats")
@@ -285,9 +278,12 @@ st.write("")
 st.markdown("---")
 st.write("")
 
+
 ##############################
 ###### GANZER DATENSATZ ######
 ##############################
+
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
 	st.dataframe(data=energy.reset_index(drop=True))
+
