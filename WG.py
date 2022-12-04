@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #####################
 
 st.set_page_config(
-    page_title="Engerieverbauch",
+    page_title="Engerieverbäuche",
     page_icon="",
     menu_items={}
 )
@@ -24,6 +24,7 @@ rgb_background = "#0f1116"
 ###################
 
 st.title(f"Energieverbräuche")
+st.markdown("---")
 
 
 ##########################
@@ -63,6 +64,8 @@ s_months["Month"] = month_lst
 ###### VERBRAUCH LETZTEN 30 TAGE ######
 #######################################
 
+st.subheader(f"Verbräuche letzten 30 Tage")
+
 g_jetzt = gas["Datum"][len(gas["Datum"])-1]
 g_one_month_ago = g_jetzt - timedelta(days = 30)
 g_lm = (gas[gas["Datum"] > g_one_month_ago]).reset_index()
@@ -85,9 +88,6 @@ s_consumption_lm = s_consumption_lm / s_duration * 30
 s_costs_lm =  round(((8.85 + s_consumption_lm * 0.3985) / 100),2)
 s_costs_lm_pp = round(s_costs_lm / 3,2)
 
-st.markdown("---")
-st.subheader(f"Verbräuche letzten 30 Tage.")
-
 st.write(f"Gaskosten letzte 30 Tage: {g_costs_lm}€")
 st.write(f"Das sind {g_costs_lm_pp}€ pro Person.")
 st.write("")
@@ -98,9 +98,9 @@ st.markdown("---")
 st.write("")
 
 
-####################################
-###### DURCHSCHNITTSVERBRAUCH ######
-####################################
+########################################
+###### VERBRAUCH UND DURCHSCHNITT ######
+########################################
 
 st.subheader("Verbrauch und Durchschnitt")
 
@@ -122,6 +122,10 @@ for i in range(len(energy[energy_str])):
 	current_avg = (energy[energy_str][:i].sum()/i)
 	avg_energy.append(current_avg)
 energy["Average"] = avg_energy
+if carrier == "Gas":
+	gas["Average"] = avg_energy
+elif carrier == "Strom":
+	strom["Average"] = avg_energy
 
 fig, ax = plt.subplots(figsize = (9,9))
 ax.plot(energy["Datum"], energy[energy_str])
@@ -141,9 +145,9 @@ st.markdown("---")
 st.write("")
 
 
-#####################################
-###### KOSTEM SEIT START ######
-#####################################
+###############################
+###### KOSTEN SEIT START ######
+###############################
 
 st.subheader(f"Energiekosten seit Einzug")
 
@@ -211,7 +215,7 @@ st.write("")
 ###### VERBRAUCH PRO MONAT ######
 #################################
 
-st.subheader(f"Verbräuche pro Monat:")
+st.subheader(f"Verbräuche pro Monat")
 
 carrier2 = st.radio(
     "Energieversorger auswählen:",
@@ -237,7 +241,7 @@ st.write("")
 ###### ZÄHLERSTÄNDE LETZTEN 30 TAGE ######
 ##########################################
 
-st.subheader("Zählerstände der letzten 30 Tage:")
+st.subheader("Zählerstände der letzten 30 Tage")
 
 col1, col2 = st.columns(2)
 
@@ -285,5 +289,13 @@ st.write("")
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
-	st.dataframe(data=energy.reset_index(drop=True))
+	col1, col2 = st.columns(2)
+
+	with col1:
+		st.markdown("##### Gas")
+		st.dataframe(data=gas[["Datum", "Gas"]].reset_index(drop=True))
+
+	with col2:
+		st.markdown("##### Strom")
+		st.dataframe(data=strom[["Datum", "Strom"]].reset_index(drop=True))
 
