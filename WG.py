@@ -88,11 +88,16 @@ s_consumption_lm = s_consumption_lm / s_duration * 30
 s_costs_lm =  round(((8.85 + s_consumption_lm * 0.3985) / 100),2)
 s_costs_lm_pp = round(s_costs_lm / 3,2)
 
-st.write(f"Gaskosten letzte 30 Tage: {g_costs_lm}€")
-st.write(f"Das sind {g_costs_lm_pp}€ pro Person.")
-st.write("")
-st.write(f"Stromkosten letzte 30 Tage: {s_costs_lm}€")
-st.write(f"Das sind {s_costs_lm_pp}€ pro Person.")
+col1, col2 = st.columns(2)
+
+with col1:
+	st.metric(label = "Gas", value = f"{g_costs_lm}€")
+	st.write(f"Pro Person: {g_costs_lm_pp}")
+
+with col2:
+	st.metric(label = "Strom", value =f"{s_costs_lm}€")
+	st.write(f"Pro Person: {s_costs_lm_pp}")
+
 st.write("")
 st.markdown("---")
 st.write("")
@@ -199,12 +204,19 @@ s_average_total = round(((s_base_price + s_consumption_total * s_average_price))
 s_duration_total_m = s_duration_total_d / 30
 s_average_per_month = round(s_average_total / s_duration_total_m, 2)
 
-st.write(f"Durchschnitssverbauch Gas: {g_average_per_month}€ pro Monat")
-st.write(f"Durchschnittlicher Preis pro Einheit Gas: {round(g_average_price,4)}€")
-st.write(f"Gesamtkosten Gas seit Einzug: {g_average_total}€")
-st.write(f"Durchschnitssverbauch Strom: {s_average_per_month}€ pro Monat")
-st.write(f"Durchschnittlicher Preis pro Einheit Strom: {round(s_average_price,4)}€")
-st.write(f"Gesamtkosten Strom seit Einzug: {s_average_total}€")
+col1, col2 = st.columns(2)
+
+with col1:
+	st.markdown("##### Gas")
+	st.write(f"Durchschnitssverbauch: {g_average_per_month}€ pro Monat")
+	st.write(f"Durchschnittlicher Preis: {round(g_average_price,4)}€ / kWh")
+	st.write(f"Gesamtkosten seit Einzug: {g_average_total}€")
+
+with col2:
+	st.markdown("##### Strom")
+	st.write(f"Durchschnitssverbauch: {s_average_per_month}€ pro Monat")
+	st.write(f"Durchschnittlicher Preis: {round(s_average_price,4)}€ / kWh")
+	st.write(f"Gesamtkosten seit Einzug: {s_average_total}€")
 
 st.write("")
 st.markdown("---")
@@ -247,11 +259,11 @@ col1, col2 = st.columns(2)
 
 with col1:
 	st.markdown("##### Gas")
-	st.write(g_lm[["Datum", "Gas"]])
+	st.table(g_lm[["Datum", "Gas"]])
 
 with col2:
 	st.markdown("##### Strom")
-	st.write(s_lm[["Datum", "Strom"]])
+	st.table(s_lm[["Datum", "Strom"]])
 
 st.write("")
 st.markdown("---")
