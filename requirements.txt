@@ -6,3 +6,5 @@ gspread
 PyOpenSSL
 oauth2client
 matplotlib
+zipfile
+io
