@@ -21,6 +21,10 @@ st.set_page_config(
 
 rgb_background = "#0f1116"
 
+first_october = "2022-10-01"
+time_format = "%Y-%m-%d"
+first_october = datetime.strptime(first_october, time_format)
+
 
 ###################
 ###### TITEL ######
@@ -156,70 +160,146 @@ st.write("")
 ###############################
 ###### KOSTEN SEIT START ######
 ###############################
+tab1, tab2 = st.tabs(["Seit Einzug", "Seit Anna"])
+with tab1:
+	st.subheader(f"Energiekosten seit Einzug")
 
-st.subheader(f"Energiekosten seit Einzug")
+	g_duration_lst = []
+	for i in range(len(g_prices)-1):
+		g_duration = (g_prices["Datum"][i+1] - g_prices["Datum"][i]).days
+		g_duration_lst.append(g_duration)
+	g_last_duration = (gas["Datum"][len(gas["Datum"])-1] - g_prices["Datum"][len(g_prices["Datum"])-1]).days
+	g_duration_lst.append(g_last_duration)
+	g_duration_total_d = (g_jetzt-g_first_date).days
+	g_consumption_total = (gas["Gas"][len(gas)-1] - gas["Gas"][0]) / 100
+	g_share_lst = []	
+	for i in range(len(g_prices["Datum"])):
+		g_price_share = g_duration_lst[i] / g_duration_total_d
+		g_share_lst.append(g_price_share)
+	g_price_share_lst = []
+	for i in range(len(g_prices["Datum"])):
+		g_price_share = g_share_lst[i] * g_prices["Preis"][i] / 10000
+		g_price_share_lst.append(g_price_share)
+	g_average_price = 0
+	for i in range(len(g_price_share_lst)):
+		g_average_price += g_price_share_lst[i]
+	g_base_price = 241.96 / 365 * g_duration_total_d
+	g_average_total = round(((g_base_price + g_consumption_total * g_average_price * 10)),2)
+	g_duration_total_m = g_duration_total_d / 30
+	g_average_per_month = round(g_average_total / g_duration_total_m, 2)
 
-g_duration_lst = []
-for i in range(len(g_prices)-1):
-	g_duration = (g_prices["Datum"][i+1] - g_prices["Datum"][i]).days
-	g_duration_lst.append(g_duration)
-g_last_duration = (gas["Datum"][len(gas["Datum"])-1] - g_prices["Datum"][len(g_prices["Datum"])-1]).days
-g_duration_lst.append(g_last_duration)
-g_duration_total_d = (g_jetzt-g_first_date).days
-g_consumption_total = (gas["Gas"][len(gas)-1] - gas["Gas"][0]) / 100
-g_share_lst = []	
-for i in range(len(g_prices["Datum"])):
-	g_price_share = g_duration_lst[i] / g_duration_total_d
-	g_share_lst.append(g_price_share)
-g_price_share_lst = []
-for i in range(len(g_prices["Datum"])):
-	g_price_share = g_share_lst[i] * g_prices["Preis"][i] / 10000
-	g_price_share_lst.append(g_price_share)
-g_average_price = 0
-for i in range(len(g_price_share_lst)):
-	g_average_price += g_price_share_lst[i]
-g_base_price = 241.96 / 365 * g_duration_total_d
-g_average_total = round(((g_base_price + g_consumption_total * g_average_price * 10)),2)
-g_duration_total_m = g_duration_total_d / 30
-g_average_per_month = round(g_average_total / g_duration_total_m, 2)
+	s_duration_lst = []
+	for i in range(len(s_prices)-1):
+		s_duration = (s_prices["Datum"][i+1] - s_prices["Datum"][i]).days
+		s_duration_lst.append(s_duration)
+	s_last_duration = (strom["Datum"][len(strom["Datum"])-1] - s_prices["Datum"][len(s_prices["Datum"])-1]).days
+	s_duration_lst.append(s_last_duration)
+	s_duration_total_d = (s_jetzt-s_first_date).days
+	s_consumption_total = (strom["Strom"][len(strom)-1] - strom["Strom"][0]) / 100
+	s_share_lst = []	
+	for i in range(len(s_prices["Datum"])):
+		s_price_share = s_duration_lst[i] / s_duration_total_d
+		s_share_lst.append(s_price_share)
+	s_price_share_lst = []
+	for i in range(len(s_prices["Datum"])):
+		s_price_share = s_share_lst[i] * s_prices["Preis"][i] / 10000
+		s_price_share_lst.append(s_price_share)
+	s_average_price = 0
+	for i in range(len(s_price_share_lst)):
+		s_average_price += s_price_share_lst[i]
+	s_base_price = 106.2 / 365 * s_duration_total_d
+	s_average_total = round(((s_base_price + s_consumption_total * s_average_price)),2)
+	s_duration_total_m = s_duration_total_d / 30
+	s_average_per_month = round(s_average_total / s_duration_total_m, 2)
 
-s_duration_lst = []
-for i in range(len(s_prices)-1):
-	s_duration = (s_prices["Datum"][i+1] - s_prices["Datum"][i]).days
-	s_duration_lst.append(s_duration)
-s_last_duration = (strom["Datum"][len(strom["Datum"])-1] - s_prices["Datum"][len(s_prices["Datum"])-1]).days
-s_duration_lst.append(s_last_duration)
-s_duration_total_d = (s_jetzt-s_first_date).days
-s_consumption_total = (strom["Strom"][len(strom)-1] - strom["Strom"][0]) / 100
-s_share_lst = []	
-for i in range(len(s_prices["Datum"])):
-	s_price_share = s_duration_lst[i] / s_duration_total_d
-	s_share_lst.append(s_price_share)
-s_price_share_lst = []
-for i in range(len(s_prices["Datum"])):
-	s_price_share = s_share_lst[i] * s_prices["Preis"][i] / 10000
-	s_price_share_lst.append(s_price_share)
-s_average_price = 0
-for i in range(len(s_price_share_lst)):
-	s_average_price += s_price_share_lst[i]
-s_base_price = 106.2 / 365 * s_duration_total_d
-s_average_total = round(((s_base_price + s_consumption_total * s_average_price)),2)
-s_duration_total_m = s_duration_total_d / 30
-s_average_per_month = round(s_average_total / s_duration_total_m, 2)
+	col1, col2 = st.columns(2)
 
-col1, col2 = st.columns(2)
+	with col1:
+		st.markdown("##### Gas")
+		st.write(f"Durchschnitssverbauch: {g_average_per_month}€ pro Monat")
+		st.write(f"Durchschnittlicher Preis: {round(g_average_price,4)}€ / kWh")
+		st.write(f"Gesamtkosten seit Einzug: {g_average_total}€")
 
-with col1:
-	st.markdown("##### Gas")
-	st.write(f"Durchschnitssverbauch: {g_average_per_month}€ pro Monat")
-	st.write(f"Durchschnittlicher Preis: {round(g_average_price,4)}€ / kWh")
-	st.write(f"Gesamtkosten seit Einzug: {g_average_total}€")
+	with col2:
+		st.markdown("##### Strom")
+		st.write(f"Durchschnitssverbauch: {s_average_per_month}€ pro Monat")
+		st.write(f"Durchschnittlicher Preis: {round(s_average_price,4)}€ / kWh")
+		st.write(f"Gesamtkosten seit Einzug: {s_average_total}€")
 
-with col2:
-	st.markdown("##### Strom")
-	st.write(f"Durchschnitssverbauch: {s_average_per_month}€ pro Monat")
-	st.write(f"Durchschnittlicher Preis: {round(s_average_price,4)}€ / kWh")
-	st.write(f"Gesamtkosten seit Einzug: {s_average_total}€")
+with tab2:
+	st.subheader(f"Energiekosten seit Anna")
+
+	a_g_prices = g_prices[g_prices["Datum"] >= first_october]
+	a_s_prices = s_prices[s_prices["Datum"] >= first_october]
+	a_gas = gas[gas["Datum"] >= first_october]
+	a_strom = strom[strom["Datum"] >= first_october]
+
+	a_g_prices.reset_index(inplace = True)
+	a_s_prices.reset_index(inplace = True)
+	a_gas.reset_index(inplace = True)
+	a_strom.reset_index(inplace = True)
+
+	a_g_duration_lst = []
+	for i in range(len(a_g_prices)-1):
+		a_g_duration = (a_g_prices["Datum"][i+1] - a_g_prices["Datum"][i]).days
+		a_g_duration_lst.append(a_g_duration)
+	a_g_last_duration = (a_gas["Datum"][len(a_gas["Datum"])-1] - a_g_prices["Datum"][len(a_g_prices["Datum"])-1]).days
+	a_g_duration_lst.append(a_g_last_duration)
+	a_g_duration_total_d = (g_jetzt-g_first_date).days
+	a_g_consumption_total = (a_gas["Gas"][len(a_gas)-1] - a_gas["Gas"][0]) / 100
+	a_g_share_lst = []	
+	for i in range(len(a_g_prices["Datum"])):
+		a_g_price_share = a_g_duration_lst[i] / a_g_duration_total_d
+		a_g_share_lst.append(a_g_price_share)
+	a_g_price_share_lst = []
+	for i in range(len(a_g_prices["Datum"])):
+		a_g_price_share = a_g_share_lst[i] * a_g_prices["Preis"][i] / 10000
+		a_g_price_share_lst.append(a_g_price_share)
+	a_g_average_price = 0
+	for i in range(len(a_g_price_share_lst)):
+		a_g_average_price += a_g_price_share_lst[i]
+	a_g_base_price = 241.96 / 365 * a_g_duration_total_d
+	a_g_average_total = round(((a_g_base_price + a_g_consumption_total * a_g_average_price * 10)),2)
+	a_g_duration_total_m = a_g_duration_total_d / 30
+	a_g_average_per_month = round(a_g_average_total / a_g_duration_total_m, 2)
+
+	a_s_duration_lst = []
+	for i in range(len(a_s_prices)-1):
+		a_s_duration = (a_s_prices["Datum"][i+1] - a_s_prices["Datum"][i]).days
+		a_s_duration_lst.append(a_s_duration)
+	a_s_last_duration = (a_strom["Datum"][len(a_strom["Datum"])-1] - a_s_prices["Datum"][len(a_s_prices["Datum"])-1]).days
+	a_s_duration_lst.append(a_s_last_duration)
+	a_s_duration_total_d = (s_jetzt-s_first_date).days
+	a_s_consumption_total = (a_strom["Strom"][len(a_strom)-1] - a_strom["Strom"][0]) / 100
+	a_s_share_lst = []	
+	for i in range(len(a_s_prices["Datum"])):
+		a_s_price_share = a_s_duration_lst[i] / a_s_duration_total_d
+		a_s_share_lst.append(a_s_price_share)
+	a_s_price_share_lst = []
+	for i in range(len(a_s_prices["Datum"])):
+		a_s_price_share = a_s_share_lst[i] * a_s_prices["Preis"][i] / 10000
+		a_s_price_share_lst.append(a_s_price_share)
+	a_s_average_price = 0
+	for i in range(len(a_s_price_share_lst)):
+		a_s_average_price += a_s_price_share_lst[i]
+	a_s_base_price = 106.2 / 365 * a_s_duration_total_d
+	a_s_average_total = round(((a_s_base_price + a_s_consumption_total * a_s_average_price)),2)
+	a_s_duration_total_m = a_s_duration_total_d / 30
+	a_s_average_per_month = round(a_s_average_total / a_s_duration_total_m, 2)
+
+	col1, col2 = st.columns(2)
+
+	with col1:
+		st.markdown("##### Gas")
+		st.write(f"Durchschnitssverbauch: {a_g_average_per_month}€ pro Monat")
+		st.write(f"Durchschnittlicher Preis: {round(a_g_average_price,4)}€ / kWh")
+		st.write(f"Gesamtkosten seit Anna: {a_g_average_total}€")
+
+	with col2:
+		st.markdown("##### Strom")
+		st.write(f"Durchschnitssverbauch: {a_s_average_per_month}€ pro Monat")
+		st.write(f"Durchschnittlicher Preis: {round(a_s_average_price,4)}€ / kWh")
+		st.write(f"Gesamtkosten seit Anna: {a_s_average_total}€")
 
 st.write("")
 st.markdown("---")
@@ -321,13 +401,3 @@ with see_data:
 st.write("")
 st.markdown("---")
 st.write("")
-
-see_camera = st.expander('Cheese! 📸')
-with see_camera:
-	picture = st.camera_input(" ")
-
-if picture:
-	file_name = f"./pictures/{datetime.now()}.jpg"
-	with open (file_name,'wb') as file:
-		file.write(picture.getbuffer())
-	st.success("Tipptopp")
