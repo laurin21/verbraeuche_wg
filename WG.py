@@ -5,6 +5,9 @@ import numpy as np
 import time
 import gspread
 import matplotlib.pyplot as plt
+from zipfile import ZipFile
+from io import BytesIO
+
 
 #####################
 ###### CONFIGS ######
@@ -321,4 +324,10 @@ st.write("")
 
 see_camera = st.expander('Cheese! 📸')
 with see_camera:
-	img_file_buffer = st.camera_input(label = "")
+	picture = st.camera_input(" ")
+
+if picture:
+	file_name = f"./pictures/{datetime.now()}.jpg"
+	with open (file_name,'wb') as file:
+		file.write(picture.getbuffer())
+	st.success("Tipptopp")
