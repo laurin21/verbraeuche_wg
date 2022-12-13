@@ -88,7 +88,9 @@ place = len(g_prices)-len(g_prices_lm)-1
 
 st.write(g_prices)
 
-g_prices_lm.insert(0, g_prices[place])
+g_prices_lm.insert(0, g_prices["Preis"][place])
+
+st.write(g_prices_lm)
 
 g_duration_lst_lm = []
 for i in range(len(g_prices_lm)-1):
