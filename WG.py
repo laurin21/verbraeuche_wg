@@ -83,10 +83,7 @@ g_consumption_lm = g_consumption_lm / g_duration * 30
 
 position = len(g_prices) - len((g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()) -1
 
-st.write(position)
-
 g_prices_lm = g_prices[:][position:].reset_index()
-
 
 g_duration_lst_lm = []
 for i in range(len(g_prices_lm)-1):
