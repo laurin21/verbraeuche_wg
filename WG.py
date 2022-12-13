@@ -81,11 +81,11 @@ g_duration = (g_jetzt-g_first_lm).days
 g_consumption_lm = g_lm["Gas"][len(g_lm)-1] - g_lm["Gas"][0]
 g_consumption_lm = g_consumption_lm / g_duration * 30
 
-position = len((g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index())-1
+position = len(g_prices) - len((g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()) -1
 
 st.write(position)
 
-g_prices_lm = g_prices[:][psoition:].reset_index()
+g_prices_lm = g_prices[:][position:].reset_index()
 
 
 g_duration_lst_lm = []
