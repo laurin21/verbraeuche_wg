@@ -92,7 +92,7 @@ for i in range(len(g_prices_lm)-1):
 g_last_duration_lm = (g_lm["Datum"][len(g_lm["Datum"])-1] - g_prices_lm["Datum"][len(g_prices_lm["Datum"])-1]).days
 g_duration_lst_lm.append(g_last_duration_lm)
 g_duration_total_d_lm = (g_jetzt-g_first_date).days
-g_consumption_total_lm = (g_lm["Gas"][len(g_lm)] - g_lm["Gas"][0]) / 100
+g_consumption_total_lm = (g_lm["Gas"][len(g_lm)-1] - g_lm["Gas"][0]) / 100
 g_share_lst_lm = []	
 for i in range(len(g_prices_lm["Datum"])):
 	g_price_share_lm = g_duration_lst_lm[i] / g_duration_total_d_lm
