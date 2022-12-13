@@ -88,7 +88,7 @@ place = len(g_prices)-len(g_prices_lm)-1
 
 st.write(g_prices)
 
-g_prices_lm.insert(0, g_prices["Preis"][place])
+g_prices_lm.insert(0, value = g_prices["Preis"][place])
 
 st.write(g_prices_lm)
 
