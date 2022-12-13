@@ -85,9 +85,17 @@ g_consumption_lm = g_consumption_lm / g_duration * 30
 g_prices_lm = (g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()
 g_prices_first_lm = g_prices_lm["Datum"][0]
 
+g_duration_lst_lm = []
+for i in range(len(g_prices_lm)-1):
+	g_duration_lm = (g_prices_lm["Datum"][i+1] - g_prices_lm["Datum"][i]).days
+	g_duration_lst_lm.append(g_duration_lm)
+g_last_duration_lm = (g_lm["Datum"][len(g_lm["Datum"])-1] - g_prices_lm["Datum"][len(g_prices_lm["Datum"])-1]).days
+g_duration_lst_lm.append(g_last_duration_lm)
+g_duration_total_d_lm = (g_jetzt-g_first_date).days
+g_consumption_total_lm = (g_lm["Gas"][len(gas)-1] - g_lm["Gas"][0]) / 100
 g_share_lst_lm = []	
 for i in range(len(g_prices_lm["Datum"])):
-	g_price_share_lm = g_duration_lst_lm[i] / 30
+	g_price_share_lm = g_duration_lst_lm[i] / g_duration_total_d_lm
 	g_share_lst_lm.append(g_price_share_lm)
 g_price_share_lst_lm = []
 for i in range(len(g_prices_lm["Datum"])):
@@ -97,8 +105,9 @@ g_average_price_lm = 0
 for i in range(len(g_price_share_lst_lm)):
 	g_average_price_lm += g_price_share_lst_lm[i]
 g_base_price_lm = 241.96 / 365 * g_duration_total_d_lm
-g_average_total_lm = round(((g_base_price_lm + g_consumption_total_lm * g_average_price_lm * 10)),2)
-g_costs_lm_pp = round(g_average_total_lm / 3,2)
+g_average_total_lm = round(((g_base_price_lm+ g_consumption_total_lm * g_average_price_lm * 10)),2)
+g_duration_total_m_lm = g_duration_total_d_lm / 30
+g_average_per_month_lm = round(g_average_total_lm / g_duration_total_m_lm, 2)
 
 
 
