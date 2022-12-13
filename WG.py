@@ -83,7 +83,7 @@ g_consumption_lm = g_consumption_lm / g_duration * 30
 
 #g_prices_lm = g_prices
 
-st.write(g_prices[:][0:1])
+st.write(g_prices[:][0:2])
 
 
 
