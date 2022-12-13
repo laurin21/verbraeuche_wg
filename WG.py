@@ -86,11 +86,7 @@ g_prices_lm = (g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()
 g_prices_first_lm = g_prices_lm["Datum"][0]
 place = len(g_prices)-len(g_prices_lm)-1
 
-st.write(g_prices_lm)
-
-g_prices_lm.insert(0, column = "Preis", value = g_prices["Preis"][place])
-
-st.write(g_prices_lm)
+st.write(g_prices)
 
 g_duration_lst_lm = []
 for i in range(len(g_prices_lm)-1):
