@@ -101,7 +101,7 @@ g_price_share_lst_lm = []
 for i in range(len(g_prices_lm["Datum"])):
 	g_price_share_lm = g_share_lst_lm[i] * g_prices_lm["Preis"][i] / 10000
 	g_price_share_lst_lm.append(g_price_share_lm)
-g_price_share_lst_lm = 0
+g_average_price_lm = 0
 for i in range(len(g_price_share_lst_lm)):
 	g_average_price_lm += g_price_share_lst_lm[i]
 g_base_price_lm = 20.1633
