@@ -33,7 +33,6 @@ first_october = datetime.strptime(first_october, time_format)
 st.title(f"Energieverbräuche")
 st.markdown("---")
 
-
 ##########################
 ###### IMPORT DATEN ######
 ##########################
@@ -81,8 +80,27 @@ g_first_date = gas["Datum"][0]
 g_duration = (g_jetzt-g_first_lm).days
 g_consumption_lm = g_lm["Gas"][len(g_lm)-1] - g_lm["Gas"][0]
 g_consumption_lm = g_consumption_lm / g_duration * 30
-g_costs_lm =  round(((20.16333333 + g_consumption_lm *0.1596 * 10) / 100),2)
-g_costs_lm_pp = round(g_costs_lm / 3,2)
+
+
+g_prices_lm = (g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()
+g_prices_first_lm = g_prices_lm["Datum"][0]
+
+g_share_lst_lm = []	
+for i in range(len(g_prices_lm["Datum"])):
+	g_price_share_lm = g_duration_lst_lm[i] / g_duration_total_d_lm
+	g_share_lst_lm.append(g_price_share_lm)
+g_price_share_lst_lm = []
+for i in range(len(g_prices_lm["Datum"])):
+	g_price_share_lm = g_share_lst_lm[i] * g_prices_lm["Preis"][i] / 10000
+	g_price_share_lst_lm.append(g_price_share_lm)
+g_average_price_lm = 0
+for i in range(len(g_price_share_lst_lm)):
+	g_average_price_lm += g_price_share_lst_lm[i]
+g_base_price_lm = 241.96 / 365 * g_duration_total_d_lm
+g_average_total_lm = round(((g_base_price_lm + g_consumption_total_lm * g_average_price_lm * 10)),2)
+g_costs_lm_pp = round(g_average_total_lm / 3,2)
+
+
 
 s_jetzt = strom["Datum"][len(strom["Datum"])-1]
 s_one_month_ago = s_jetzt - timedelta(days = 30)
@@ -238,6 +256,11 @@ with tab2:
 	a_s_prices.reset_index(inplace = True)
 	a_gas.reset_index(inplace = True)
 	a_strom.reset_index(inplace = True)
+
+	st.write(a_g_prices)
+	st.write(a_s_prices)
+	st.write(a_gas)
+	st.write(a_strom)
 
 	a_g_duration_lst = []
 	for i in range(len(a_g_prices)-1):
