@@ -82,11 +82,14 @@ g_consumption_lm = g_lm["Gas"][len(g_lm)-1] - g_lm["Gas"][0]
 g_consumption_lm = g_consumption_lm / g_duration * 30
 
 
-g_prices_lm = (g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()
+g_prices_lm = (g_prices[g_prices["Datum"] > g_one_month_ago]-1).reset_index()
 g_prices_first_lm = g_prices_lm["Datum"][0]
 place = len(g_prices)-len(g_prices_lm)-1
 
 st.write(g_prices)
+
+
+
 
 g_duration_lst_lm = []
 for i in range(len(g_prices_lm)-1):
