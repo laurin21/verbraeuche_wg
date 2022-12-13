@@ -108,6 +108,7 @@ g_base_price_lm = 241.96 / 365 * g_duration_total_d_lm
 g_average_total_lm = round(((g_base_price_lm+ g_consumption_total_lm * g_average_price_lm * 10)),2)
 g_duration_total_m_lm = g_duration_total_d_lm / 30
 g_average_per_month_lm = round(g_average_total_lm / g_duration_total_m_lm, 2)
+g_average_per_month_lm_pp = round(g_average_per_month_lm / 3, 2)
 
 
 
@@ -125,8 +126,8 @@ s_costs_lm_pp = round(s_costs_lm / 3,2)
 col1, col2 = st.columns(2)
 
 with col1:
-	st.metric(label = "Gas", value = f"{g_costs_lm}€")
-	st.write(f"Pro Person: {g_costs_lm_pp}")
+	st.metric(label = "Gas", value = f"{g_average_per_month_lm}€")
+	st.write(f"Pro Person: {g_average_per_month_lm_pp}")
 
 with col2:
 	st.metric(label = "Strom", value =f"{s_costs_lm}€")
