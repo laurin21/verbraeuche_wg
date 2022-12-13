@@ -86,9 +86,9 @@ g_prices_lm = (g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index()
 g_prices_first_lm = g_prices_lm["Datum"][0]
 place = len(g_prices)-len(g_prices_lm)-1
 
-st.write(g_prices)
+st.write(g_prices_lm)
 
-g_prices_lm.insert(0, value = g_prices["Preis"][place])
+g_prices_lm.insert(row = 0, column = 2, value = g_prices["Preis"][place])
 
 st.write(g_prices_lm)
 
