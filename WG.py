@@ -85,7 +85,7 @@ position = len((g_prices[g_prices["Datum"] > g_one_month_ago]).reset_index())-1
 
 st.write(position)
 
-g_prices_lm = g_prices[:][psoition:]).reset_index()
+g_prices_lm = g_prices[:][psoition:].reset_index()
 
 
 g_duration_lst_lm = []
