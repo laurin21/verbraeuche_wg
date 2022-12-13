@@ -87,7 +87,7 @@ g_prices_first_lm = g_prices_lm["Datum"][0]
 
 g_share_lst_lm = []	
 for i in range(len(g_prices_lm["Datum"])):
-	g_price_share_lm = g_duration_lst_lm[i] / g_duration_total_d_lm
+	g_price_share_lm = g_duration_lst_lm[i] / 30
 	g_share_lst_lm.append(g_price_share_lm)
 g_price_share_lst_lm = []
 for i in range(len(g_prices_lm["Datum"])):
